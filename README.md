@@ -132,5 +132,52 @@ Commands you may need to solve this level
 - Type `exit`
 
 
+## **Bandit Level 11 → Level 12**
+> The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions.
+Commands you may need to solve this level
+`grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd`
+
+- Type ```ssh bandit11@bandit.labs.overthewire.org -p 2220```
+- Enter the password  `IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR`
+- Type `tr '[a-z][A-Z]' '[n-za-m][N-ZA-M]' < data.txt`  OR `tr '[a-z][A-Z]' '[n-z][a-m][N-Z][A-M]' < data.txt`. 
+- Transalate (tr) replaces all instances of first set of characters with the other ones as given. In this case, each letter is shifted 13 positions.
+- The output should be `The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu`. Copy it.
+- Type `exit`
+
+## **Bandit Level 12 → Level 13**
+> The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!).
+Commands you may need to solve this level
+`grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd, mkdir, cp, mv, file`
+
+- Type ```ssh bandit12@bandit.labs.overthewire.org -p 2220```
+- Enter the password  `5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu`
+- As mentioned in question make a new directory in /tmp, copy `data.txt` int the  new directory and rename the file. Here I didn't rename it.
+- `cd` into your new dir.
+- xxd program is used to make a hexdump or to do the reverse. Using flag -r convert hexdump into the binary. File `data.txt` is a hexdump and convert it into a binary file `data2` using command `xxd -r data.txt > data2`
+
+
+- Using command `file data2` , we found that `data2` is a gzip compressed data.
+- zcat is a program supplied with gzip and is used to decompress gzip compressed files.
+- Enter `zcat data2 > data3` then, `file data3`
+
+
+- We found that `data3` is a bzip2 compressed data.
+- bzcat is a program supplied with bzip2 and is used to decompress bzip2 compressed files.
+- After `bzcat data3 > data4` and `file data4`, we found that `data4` is a gzip compressed file. Use command `zcat data4 > data5` and then again `file data5`
+
+
+- `data5` is a POSIX tar archive. tar program is used for archiving file and options 'x' is used to extract an archive, 'f' is used to specify name of the tar archive and 'v' is used for more detailed listing.
+- Use `tar -xvf data5` OR `tar -x -f data5` and then using `ls`, you will see there is now a `data5.bin` file. Use `file data5.bin`. Again it's a tar archive.
+
+- `tar -xvf data5.bin` outputs file `data6.bin` which is a bzip2 compressed file. Use `bzcat` to decompress it to `data7`.
+
+
+- `data7` is a tar archive and use `tar` program which outputs `data8.bin`. data8.bin is a gzip compressed file and use `zcat` to decompress it to file `data9`.
+- `data9` contains ASCII text and `cat data9` tells us the password
+
+- `The password for the next level is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL`. 
+- Type `exit`
+
+
 
 
