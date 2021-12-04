@@ -84,7 +84,7 @@ owned by group bandit6,
 Commands you may need to solve this level
 `ls, cd, cat, file, du, find, grep`
 
--Type ```ssh bandit6@bandit.labs.overthewire.org -p 2220```
+- Type ```ssh bandit6@bandit.labs.overthewire.org -p 2220```
 - Enter the password  `DXjZPULLxYr17uwoI01bNLQbtFemEgo7`
 - Type `find / -type f -user bandit7 -group bandit6 -size 33c 2>/dev/null`. 2>/dev/null takes stderr and throws it away!
 - Then `cat /var/lib/dpkg/info/bandit7.password` and copy the password `HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs`
@@ -94,7 +94,9 @@ Commands you may need to solve this level
 > The password for the next level is stored in the file data.txt next to the word millionth.
 Commands you may need to solve this level
 `grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd`
--Type ```ssh bandit7@bandit.labs.overthewire.org -p 2220```
+
+
+- Type ```ssh bandit7@bandit.labs.overthewire.org -p 2220```
 - Enter the password  `HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs`
 - Type `grep millionth data.txt`. You should see `millionth	cvX2JJa4CFALtqS87jk27qwqGhBM9plV`. Copy the password.
 - Type `exit`
@@ -104,7 +106,7 @@ Commands you may need to solve this level
 Commands you may need to solve this level
 `grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd`
 
--Type ```ssh bandit8@bandit.labs.overthewire.org -p 2220```
+- Type ```ssh bandit8@bandit.labs.overthewire.org -p 2220```
 - Enter the password  `cvX2JJa4CFALtqS87jk27qwqGhBM9plV`
 - Type `sort data.txt | uniq -u`. First the list will be sorted alphabetically, and then uniq -u prints only unique lines.
 - Copy `UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR`
@@ -114,6 +116,21 @@ Commands you may need to solve this level
 > The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.
 Commands you may need to solve this level
 `grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd`
--Type ```ssh bandit9@bandit.labs.overthewire.org -p 2220```
+- Type ```ssh bandit9@bandit.labs.overthewire.org -p 2220```
 - Enter the password  `UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR`
-- 
+- Type `strings data.txt | grep '=='`. If you look up the man page for `strings`, it says " print the strings of printable characters in files". You should see many strings in the terminal preceeded by several =, among them `truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk` seems to be the password. Copy it.
+- Type `exit`
+
+## **Bandit Level 10 → Level 11**
+> The password for the next level is stored in the file data.txt, which contains base64 encoded data.
+Commands you may need to solve this level
+`grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd`
+
+- Type ```ssh bandit10@bandit.labs.overthewire.org -p 2220```
+- Enter the password  `truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk`
+- Type `base64 --decode data.txt`. You should see `The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR`. Copy it.
+- Type `exit`
+
+
+
+
