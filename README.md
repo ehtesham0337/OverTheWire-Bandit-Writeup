@@ -201,5 +201,4 @@ ssh, telnet, nc, openssl, s_client, nmap`
 - When it says 'Connected to localhost', enter `4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e`.
 - You will be greeted with `BfMYroe26WYalil77FoDi9qh59eK5xNr`, which is the password for bandit15.
 
--  
 
