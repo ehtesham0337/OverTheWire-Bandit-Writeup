@@ -181,3 +181,25 @@ Commands you may need to solve this level
 
 
 
+## **Bandit Level 13 → Level 14**
+> The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on.
+Commands you may need to solve this level
+`ssh, telnet, nc, openssl, s_client, nmap`
+
+- `ssh` into bandit13 with the password `8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL`.
+- There is a file called `sshkey.private`. Reading it gives us a RSA Key.
+- Enter `ssh -i sshkey.private bandit14@localhost` and select `yes` to enter bandit14.
+
+
+## **Bandit Level 14 → Level 15**
+> The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
+Commands you may need to solve this level`
+ssh, telnet, nc, openssl, s_client, nmap`
+
+- Use `cat /etc/bandit_pass/bandit14`, which could previously be only accessed by user bandit14, to get the current password `4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e`. Copy it.
+- To submit it on localhost port 30000, use `telnet localhost 30000`.
+- When it says 'Connected to localhost', enter `4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e`.
+- You will be greeted with `BfMYroe26WYalil77FoDi9qh59eK5xNr`, which is the password for bandit15.
+
+-  
+
